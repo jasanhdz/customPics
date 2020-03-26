@@ -1,0 +1,16 @@
+{
+  "name": "platzipics",
+  "version": "1.0.0",
+  "description": "Aplicativo de electron para visualización de imagenes",
+  "main": "index.js",
+  "scripts": {
+    "dev": "electron index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Jasan Hernández <jasan814@gmail.com> (https://twitter.com/jasan_azael)",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^8.2.0"
+  }
+}
