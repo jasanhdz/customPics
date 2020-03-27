@@ -2,6 +2,7 @@
 
 // Iniciando los objetos app y BrowserWindow
 import { app, BrowserWindow, ipcMain, dialog } from 'electron';
+import { setupErrors } from './handleErrors';
 
 import path from 'path';
 import devtools from './devtools';
@@ -33,6 +34,9 @@ app.on('ready', () => {
     show: false
   });
 
+  setupErrors(win);
+
+  // Mostrar la ventana cuando el contenido a cargar sea cargado
   win.once('ready-to-show', () => {
     win.show();
   });
