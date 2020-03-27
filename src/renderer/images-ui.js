@@ -1,6 +1,6 @@
 import url from 'url';
 import path from 'path';
-import applyFilter from './filter';
+import { applyFilter } from './filter';
 
 export const addImageEvents = () => {
   const thumbs = document.querySelectorAll('li.list-group-item');
@@ -22,6 +22,7 @@ export const changeImage = node => {
     const image = document.getElementById('image-displayed');
     image.src = node.querySelector('img').src;
     image.dataset.original = image.src;
+    document.getElementById('filters').selectedIndex = 0;
   } else {
     document.getElementById('image-displayed').src = '';
   }
