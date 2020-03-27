@@ -133,3 +133,11 @@ module.exports = function devtools() {
 Nosotros como desarrolladores necesitamos medir diferentes metricas y verificar los procesos que ocurren con nuestra aplicación, electron-debug también podemos agregarle plugins y eso es posible gracias a devtron, el cual tenemos que instalarlo como dependencia de desarrollo, el se incluira automaticamente en nuestra ventana de devtools
 
 ``yarn add devtron --dev`
+
+## Algunos frameworks recomendados
+
+Si queremos que nuestras aplicaciones de escritorio luzcan como aplicaciones de escritorio podemos usar frameworks como Photon o Xel.
+
+http://photonkit.com/ -_ Framework_ de Html y Css que usaremos en Platzipics
+
+https://xel-toolkit.org/ - Hecho para aplicaciones Electron o Chrome muy parecido a material design.
