@@ -1,4 +1,9 @@
-import { setIpc, openDirectory, saveFile } from './ipcRendererEvents';
+import {
+  setIpc,
+  openDirectory,
+  saveFile,
+  openPreferens
+} from './ipcRendererEvents';
 import { addImageEvents, searchImage, selectEvent } from './images-ui';
 
 window.addEventListener('load', () => {
@@ -8,6 +13,7 @@ window.addEventListener('load', () => {
   selectEvent();
   buttonEvent('open-directory', openDirectory);
   buttonEvent('save-button', saveFile);
+  buttonEvent('open-preferences', openPreferens);
 });
 
 const buttonEvent = (id, func) => {

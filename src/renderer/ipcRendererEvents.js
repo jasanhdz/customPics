@@ -1,5 +1,5 @@
 import path from 'path';
-import { ipcRenderer } from 'electron';
+import { ipcRenderer, remote } from 'electron';
 import {
   clearImages,
   loadImages,
@@ -22,6 +22,22 @@ export const setIpc = () => {
       showDialog('info', 'CustomPics', 'La imagen fue guardada 👍');
     });
   });
+};
+
+export const openPreferens = () => {
+  const BrowserWindow = remote.BrowserWindow;
+
+  const preferecesWindow = new BrowserWindow({
+    width: 400,
+    height: 300,
+    title: 'Preferencias',
+    center: true,
+    modal: true,
+    frame: false,
+    show: false
+  });
+
+  preferecesWindow.show();
 };
 
 export const openDirectory = () => {
