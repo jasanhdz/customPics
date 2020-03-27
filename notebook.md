@@ -54,4 +54,56 @@ El objeto **BrowserWindow ** es el que nos permite cargar todo el contenido visu
 
 La documentación oficial de Electron esta en: https://electron.atom.io/docs/
 
-##Propiedades de una ventana de Electron
+## Propiedades de una ventana de Electron
+
+Cómo cargamos contenido a la ventana?, recuerda que estamos trabajando con una ventana de navegador, como es un navegador le podemos cargar archivos locales y archivos remotos, técnicamente el comando es el mismo pero debemos considerar que cuando cargamos archivos remotamente dependemos de la red lo que puede retrasar un poco la carga de la información.
+
+## El frontend y Electron
+
+Electron nos permite trabajar con tecnologías Web para crear aplicaciones de escritorio, Adrian nos muestra como crear una aplicación de prueba en la que usaremos HTML, CSS y JavaScript.
+Comenzamos con el desarrollo de Platzipics, veamos como crear una estructura de directorios en nuestro proyecto que nos va a ayudar a mantenerlo organizado.
+
+## Configurando nuestro frontend
+
+El proyecto electron-compile, nos permite escribir en diferentes tecnologías que no están soportadas nativamente en HTML y compila el código en tiempo de ejecución.
+
+Para ello tenemos que instalar electron compile y desinstalar electron normal com dependencia core.
+
+```
+yarn remove electron && yarn add electron-compile
+```
+
+También podemos instalar electron-prebuilt-compile que nos ayudar a soportar sintaxis de ECMASCRIPT 5
+
+```
+yarn add electron-prebuilt-compile --dev
+```
+
+Nos apoyaremos de una funcion para ejecutar el **LiveReload** ya que solo queremos hacerlo cuando estamos en desarrollo, está función la vamos a utilizar con una condición para activarla por medio de una variable de entorno.
+
+En Windows instalemos la herramienta cross-env que nos permite que las variables de entorno que configuremos en package.json sean iguales para Windows, Linux y Mac.
+
+```
+npm install cross-env --save
+```
+
+file devtools
+
+```js
+import { enableLiveReload } from "electron-compile";
+
+module.exports = function devtools() {
+  enableLiveReload();
+};
+```
+
+Uso del LiveReload
+
+```js
+import devtools from "./devtools";
+
+if (process.env.NODE_ENV === "development") {
+  console.log("La variable de entorno funciono");
+  devtools();
+}
+```

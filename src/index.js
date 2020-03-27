@@ -1,7 +1,14 @@
 'use strict'
 
 // Iniciando los objetos app y BrowserWindow
-const { app, BrowserWindow } = require('electron')
+import { app, BrowserWindow } from 'electron'
+import path from 'path'
+import devtools from './devtools'
+
+if (process.env.NODE_ENV === 'development') {
+  console.log('La variable de entorno funciono')
+  devtools()
+}
 
 // Imprimiendo un mensaje en la consola antes de salir
 app.on('before-quit', () => {
@@ -24,10 +31,10 @@ app.on('ready', () => {
     win.show()
   })
 
-  win.on('move', () => {
-    const position = win.getPosition()
-    console.log(`la position de la ventana es ${position}`)
-  })
+  // win.on('move', () => {
+  //   const position = win.getPosition()
+  //   console.log(`la position de la ventana es ${position}`)
+  // })
 
   // detectando el cierre de la ventana
   win.on('close', () => {
@@ -35,7 +42,7 @@ app.on('ready', () => {
     app.quit()
   })
 
-  win.loadURL('http://devdocs.io/')
+  win.loadURL(path.resolve(__dirname, 'renderer/index.html'))
 })
 
 
