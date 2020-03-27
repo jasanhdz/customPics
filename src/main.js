@@ -1,10 +1,12 @@
 'use strict';
 
 // Iniciando los objetos app y BrowserWindow
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog } from 'electron';
 
 import path from 'path';
 import devtools from './devtools';
+
+let win;
 
 if (process.env.NODE_ENV === 'development') {
   console.log('La variable de entorno funciono');
@@ -19,7 +21,7 @@ app.on('before-quit', () => {
 // Ejecutando ordenes cuando la aplicación esta lista
 app.on('ready', () => {
   // creando una ventana
-  let win = new BrowserWindow({
+  win = new BrowserWindow({
     width: 800,
     height: 600,
     title: 'Hello world',
@@ -46,7 +48,16 @@ app.on('ready', () => {
   win.loadURL(path.resolve(__dirname, 'renderer/index.html'));
 });
 
-ipcMain.on('ping', (event, arg) => {
-  console.log(`se recibio ping ${arg}`);
-  event.sender.send('pong', new Date());
+ipcMain.on('open-directory', event => {
+  dialog.showOpenDialog(
+    win,
+    {
+      title: 'Seleciona la nueva úbicación',
+      buttonLabel: 'Abrir ubicación',
+      properties: ['openDirectory']
+    },
+    dir => {
+      console.log(dir);
+    }
+  );
 });

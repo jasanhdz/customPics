@@ -6,11 +6,11 @@ const setIpc = () => {
   });
 };
 
-const sendIpc = () => {
-  ipcRenderer.send('ping', new Date());
+const openDirectory = () => {
+  ipcRenderer.send('open-directory');
 };
 
 module.exports = {
   setIpc,
-  sendIpc
+  openDirectory
 };
