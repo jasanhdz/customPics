@@ -90,7 +90,7 @@ npm install cross-env --save
 file devtools
 
 ```js
-import { enableLiveReload } from "electron-compile";
+import { enableLiveReload } from 'electron-compile';
 
 module.exports = function devtools() {
   enableLiveReload();
@@ -100,10 +100,36 @@ module.exports = function devtools() {
 Uso del LiveReload
 
 ```js
-import devtools from "./devtools";
+import devtools from './devtools';
 
-if (process.env.NODE_ENV === "development") {
-  console.log("La variable de entorno funciono");
+if (process.env.NODE_ENV === 'development') {
+  console.log('La variable de entorno funciono');
   devtools();
 }
 ```
+
+## Herramientas de desarrollo para Electron
+
+DevTools, nos muestra las opciones de desarrollo de la ventana
+que vamos a cargar. Electron-debug nos permite trabajar con opciones de
+desarrollo en el ambiente de desarollo.
+
+`yarn add electron-debug`
+
+lo usamos activandolo en las devtools
+
+```js
+import { enableLiveReload } from 'electron-compile';
+import electronDebug from 'electron-debug';
+
+module.exports = function devtools() {
+  enableLiveReload();
+  electronDebug({
+    showDevTools: true
+  });
+};
+```
+
+Nosotros como desarrolladores necesitamos medir diferentes metricas y verificar los procesos que ocurren con nuestra aplicación, electron-debug también podemos agregarle plugins y eso es posible gracias a devtron, el cual tenemos que instalarlo como dependencia de desarrollo, el se incluira automaticamente en nuestra ventana de devtools
+
+``yarn add devtron --dev`

@@ -1,19 +1,20 @@
-'use strict'
+'use strict';
 
 // Iniciando los objetos app y BrowserWindow
-import { app, BrowserWindow } from 'electron'
-import path from 'path'
-import devtools from './devtools'
+import { app, BrowserWindow } from 'electron';
+
+import path from 'path';
+import devtools from './devtools';
 
 if (process.env.NODE_ENV === 'development') {
-  console.log('La variable de entorno funciono')
-  devtools()
+  console.log('La variable de entorno funciono');
+  devtools();
 }
 
 // Imprimiendo un mensaje en la consola antes de salir
 app.on('before-quit', () => {
-  console.log("saliendo")
-})
+  console.log('saliendo');
+});
 
 // Ejecutando ordenes cuando la aplicación esta lista
 app.on('ready', () => {
@@ -25,11 +26,11 @@ app.on('ready', () => {
     center: true,
     maximizable: false,
     show: false
-  })
+  });
 
   win.once('ready-to-show', () => {
-    win.show()
-  })
+    win.show();
+  });
 
   // win.on('move', () => {
   //   const position = win.getPosition()
@@ -38,11 +39,9 @@ app.on('ready', () => {
 
   // detectando el cierre de la ventana
   win.on('close', () => {
-    win = null
-    app.quit()
-  })
+    win = null;
+    app.quit();
+  });
 
-  win.loadURL(path.resolve(__dirname, 'renderer/index.html'))
-})
-
-
+  win.loadURL(path.resolve(__dirname, 'renderer/index.html'));
+});

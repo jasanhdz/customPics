@@ -11,10 +11,12 @@
   "author": "Jasan Hernández <jasan814@gmail.com> (https://twitter.com/jasan_azael)",
   "license": "ISC",
   "devDependencies": {
+    "devtron": "^1.4.0",
     "electron-prebuilt-compile": "^4.0.0"
   },
   "dependencies": {
     "cross-env": "^7.0.2",
-    "electron-compile": "^6.4.4"
+    "electron-compile": "^6.4.4",
+    "electron-debug": "^3.0.1"
   }
 }
