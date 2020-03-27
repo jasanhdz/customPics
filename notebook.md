@@ -146,3 +146,18 @@ https://xel-toolkit.org/ - Hecho para aplicaciones Electron o Chrome muy parecid
 
 Cuando usamos Electron en el frontend tenemos acceso al API del navegador el API de Node.js, y el API de Electron.
 Es decir podemos tener acceso a las propiedades del Sistema Operativo, lo que es una ventaja muy significativa comparado con el desarrollo de aplicaciones Web.
+
+## Accesando recursos de la máquina
+
+Electron nos permite usar recursos nativos del sistema operativo, por esta razón es que tenemos dos procesos diferentes, el main process es el que tiene acceso a recursos como los diálogos del sistema, mensajes de error, portapapeles, etc.
+Usamos el procesos principal para abrir diálogos del sistema para cargar imágenes a PlatziPics.
+En la documentación de Electron revisamos lo relacionado con el objeto dialog https://electron.atom.io/docs/api/dialog/
+
+## Leer archivos de directorios
+
+Continuamos con la interacción con los recursos del Sistema Operativo, ya sabemos abrir un dialogo y seleccionar un directorio. En ésta clase vamos a aprender a seleccionar únicamente las imágenes de los directorios usando el modulo de npm is-image.
+
+yarn add is-image
+yarn add filesize
+
+Con el modulo file-size podemos ver fácilmente el tamaño de los archivos.
