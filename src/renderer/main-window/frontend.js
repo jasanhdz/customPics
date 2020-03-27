@@ -3,8 +3,12 @@ import {
   openDirectory,
   saveFile,
   openPreferens
-} from './ipcRendererEvents';
-import { addImageEvents, searchImage, selectEvent } from './images-ui';
+} from './main-window/ipcRendererEvents';
+import {
+  addImageEvents,
+  searchImage,
+  selectEvent
+} from './main-window/images-ui';
 
 window.addEventListener('load', () => {
   setIpc();

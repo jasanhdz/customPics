@@ -8,7 +8,7 @@ import { setupErrors } from './errors/handleErrors';
 import devtools from './devtools';
 import { setMainIpc } from './ipcMainEvents';
 
-let win;
+global.win;
 
 if (process.env.NODE_ENV === 'development') {
   console.log('La variable de entorno funciono');
@@ -23,7 +23,7 @@ app.on('before-quit', () => {
 // Ejecutando ordenes cuando la aplicación esta lista
 app.on('ready', () => {
   // creando una ventana
-  win = new BrowserWindow({
+  global.win = new BrowserWindow({
     width: 800,
     height: 600,
     title: 'Hello world',
@@ -32,19 +32,19 @@ app.on('ready', () => {
     show: false
   });
 
-  setMainIpc(win);
-  setupErrors(win);
+  setMainIpc(global.win);
+  setupErrors(global.win);
 
   // Mostrar la ventana cuando el contenido a cargar sea cargado
-  win.once('ready-to-show', () => {
-    win.show();
+  global.win.once('ready-to-show', () => {
+    global.win.show();
   });
 
   // detectando el cierre de la ventana
-  win.on('close', () => {
-    win = null;
+  global.win.on('close', () => {
+    global.win = null;
     app.quit();
   });
 
-  win.loadURL(path.resolve(__dirname, 'renderer/index.html'));
+  global.win.loadURL(path.resolve(__dirname, 'renderer/index.html'));
 });

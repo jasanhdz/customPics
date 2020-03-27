@@ -1,4 +1,5 @@
 import path from 'path';
+import os from 'os';
 import { ipcRenderer, remote } from 'electron';
 import {
   clearImages,
@@ -26,6 +27,7 @@ export const setIpc = () => {
 
 export const openPreferens = () => {
   const BrowserWindow = remote.BrowserWindow;
+  const mainWindow = remote.getGlobal('win');
 
   const preferecesWindow = new BrowserWindow({
     width: 400,
@@ -37,7 +39,15 @@ export const openPreferens = () => {
     show: false
   });
 
+  if (os.platform() !== 'win32') {
+    preferecesWindow.setParentWindow(mainWindow);
+  }
+  preferecesWindow.once('ready-to-show', () => {
+    preferecesWindow.show();
+    preferecesWindow.focus();
+  });
   preferecesWindow.show();
+  preferecesWindow.loadURL(path.resolve(__dirname, '../preferents.html'));
 };
 
 export const openDirectory = () => {
