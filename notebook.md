@@ -141,3 +141,8 @@ Si queremos que nuestras aplicaciones de escritorio luzcan como aplicaciones de 
 http://photonkit.com/ -_ Framework_ de Html y Css que usaremos en Platzipics
 
 https://xel-toolkit.org/ - Hecho para aplicaciones Electron o Chrome muy parecido a material design.
+
+## JavaScript en el frontend
+
+Cuando usamos Electron en el frontend tenemos acceso al API del navegador el API de Node.js, y el API de Electron.
+Es decir podemos tener acceso a las propiedades del Sistema Operativo, lo que es una ventaja muy significativa comparado con el desarrollo de aplicaciones Web.
