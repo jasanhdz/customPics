@@ -1,6 +1,7 @@
 import path from 'path';
 import os from 'os';
 import { ipcRenderer, remote } from 'electron';
+import settings from 'electron-settings';
 import {
   clearImages,
   loadImages,
@@ -10,11 +11,17 @@ import {
 import { saveImage } from './filter';
 
 export const setIpc = () => {
-  ipcRenderer.on('load-images', (event, images) => {
+  if (settings.has('directory')) {
+    ipcRenderer.send('load-directory', settings.get('directory'));
+  }
+
+  ipcRenderer.on('load-images', (event, dir, images) => {
     clearImages();
     loadImages(images);
     addImageEvents();
     selectFirstImage();
+    settings.set('directory', dir);
+    console.log(settings.file());
   });
 
   ipcRenderer.on('save-image', (event, file) => {
