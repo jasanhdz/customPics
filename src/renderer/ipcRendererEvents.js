@@ -5,21 +5,28 @@ import {
   addImageEvents,
   selectFirstImage
 } from './images-ui';
+import path from 'path';
 
-const setIpc = () => {
+export const setIpc = () => {
   ipcRenderer.on('load-images', (event, images) => {
     clearImages();
     loadImages(images);
     addImageEvents();
     selectFirstImage();
   });
+
+  ipcRenderer.on('save-image', (event, file) => {
+    console.log(file);
+  });
 };
 
-const openDirectory = () => {
+export const openDirectory = () => {
   ipcRenderer.send('open-directory');
 };
 
-module.exports = {
-  setIpc,
-  openDirectory
+export const saveFile = () => {
+  const image = document.getElementById('image-displayed').dataset.original;
+  console.log(image);
+  const ext = path.extname(image);
+  ipcRenderer.send('open-save-dialog', ext);
 };
