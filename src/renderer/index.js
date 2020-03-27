@@ -1,10 +1,23 @@
 import url from 'url';
 import path from 'path';
+import applyFilter from './filter';
 
 window.addEventListener('load', () => {
   addImageEvents();
   searchImage();
+  selectEvent();
 });
+
+const selectEvent = () => {
+  const select = document.getElementById('filters');
+
+  select.addEventListener('change', ({ currentTarget }) => {
+    applyFilter(
+      currentTarget.value,
+      document.getElementById('image-displayed')
+    );
+  });
+};
 
 const addImageEvents = () => {
   const thumbs = document.querySelectorAll('li.list-group-item');
@@ -16,11 +29,15 @@ const addImageEvents = () => {
 };
 
 const changeImage = node => {
-  document.querySelector('li.selected').classList.remove('selected');
-  node.classList.add('selected');
-  document.getElementById('image-displayed').src = node.querySelector(
-    'img'
-  ).src;
+  if (node) {
+    document.querySelector('li.selected').classList.remove('selected');
+    node.classList.add('selected');
+    document.getElementById('image-displayed').src = node.querySelector(
+      'img'
+    ).src;
+  } else {
+    document.getElementById('image-displayed').src = '';
+  }
 };
 
 const searchImage = () => {
@@ -29,8 +46,8 @@ const searchImage = () => {
   $searchBox.addEventListener('keyup', function() {
     const regex = new RegExp(this.value.toLowerCase(), 'gi');
 
-    const thumbs = document.querySelectorAll('li.list-group-item img');
     if (this.value.length > 0) {
+      const thumbs = document.querySelectorAll('li.list-group-item img');
       for (let i = 0; i < thumbs.length; i++) {
         const fileUrl = url.parse(thumbs[i].src);
         const fileName = path.basename(fileUrl.pathname);
@@ -42,8 +59,9 @@ const searchImage = () => {
       }
       selectFirstImage();
     } else {
-      for (let i = 0; i < thumbs.length; i++) {
-        thumbs[i].parentNode.classList.remove('hidden');
+      const hidden = document.querySelectorAll('li.hidden');
+      for (let i = 0; i < hidden.length; i++) {
+        hidden[i].classList.remove('hidden');
       }
     }
   });
