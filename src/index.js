@@ -1,7 +1,7 @@
 'use strict';
 
 // Iniciando los objetos app y BrowserWindow
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 
 import path from 'path';
 import devtools from './devtools';
@@ -44,4 +44,9 @@ app.on('ready', () => {
   });
 
   win.loadURL(path.resolve(__dirname, 'renderer/index.html'));
+});
+
+ipcMain.on('ping', (event, arg) => {
+  console.log(`se recibio ping ${arg}`);
+  event.sender.send('pong', new Date());
 });

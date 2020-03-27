@@ -1,12 +1,22 @@
 import url from 'url';
 import path from 'path';
 import applyFilter from './filter';
+import { setIpc, sendIpc } from './ipcRendererEvents';
 
 window.addEventListener('load', () => {
+  setIpc();
   addImageEvents();
   searchImage();
   selectEvent();
+  openDirectory();
 });
+
+const openDirectory = () => {
+  const openDirectory = document.getElementById('open-directory');
+  openDirectory.addEventListener('click', () => {
+    sendIpc();
+  });
+};
 
 const selectEvent = () => {
   const select = document.getElementById('filters');
