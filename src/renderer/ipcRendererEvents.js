@@ -17,12 +17,19 @@ export const setIpc = () => {
   });
 
   ipcRenderer.on('save-image', (event, file) => {
-    saveImage(file);
+    saveImage(file, err => {
+      if (err) return showDialog('error', 'CustomPics', err.message);
+      showDialog('info', 'CustomPics', 'La imagen fue guardada 👍');
+    });
   });
 };
 
 export const openDirectory = () => {
   ipcRenderer.send('open-directory');
+};
+
+export const showDialog = (type, title, msg) => {
+  ipcRenderer.send('show-dialog', { type, title, msg });
 };
 
 export const saveFile = () => {

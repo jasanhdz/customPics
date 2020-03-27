@@ -10,10 +10,8 @@ export const applyFilter = (filter, currentImage) => {
     .renderHtml(currentImage);
 };
 
-export const saveImage = fileName => {
+export const saveImage = (fileName, callback) => {
   let fileSrc = document.getElementById('image-displayed').src;
   fileSrc = fileSrc.replace(/^data:([A-Za-z-+/]+);base64,/, '');
-  fs.writeFile(fileName, fileSrc, 'base64', err => {
-    if (err) console.log(err);
-  });
+  fs.writeFile(fileName, fileSrc, 'base64', callback);
 };
