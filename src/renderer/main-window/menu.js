@@ -14,25 +14,29 @@ export const createMenu = () => {
       submenu: [
         {
           label: 'Abrir Ubicación',
+          accelerator: 'CmdOrCtrl+O',
           click() {
             openDirectory();
           }
         },
         {
           label: 'Guardar',
+          accelerator: 'CmdOrCtrl+G',
           click() {
             saveFile();
           }
         },
         {
           label: 'Preferencias',
+          accelerator: 'CmdOrCtrl+,',
           click() {
             openPreferens();
           }
         },
         {
           label: 'Cerrar',
-          rol: 'quit'
+          accelerator: 'CmdOrCtrl+Q',
+          role: 'quit'
         }
       ]
     },
@@ -41,15 +45,18 @@ export const createMenu = () => {
       submenu: [
         {
           label: 'Imprimir',
+          accelerator: 'CmdOrCtrl+P',
           click() {
             print();
           }
         },
         {
-          label: 'Subir a Cloudup'
+          label: 'Subir a Cloudup',
+          accelerator: 'CmdOrCtrl+U'
         },
         {
           label: 'Pegar Imagen',
+          accelerator: 'CmdOrCtrl+V',
           click() {
             pasteImage();
           }

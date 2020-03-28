@@ -3,7 +3,7 @@
 // Iniciando los objetos app y BrowserWindow
 import path from 'path';
 import os from 'os';
-import { app, BrowserWindow, Tray } from 'electron';
+import { app, BrowserWindow, Tray, globalShortcut } from 'electron';
 
 import { setupErrors } from './errors/handleErrors';
 import devtools from './devtools';
@@ -32,6 +32,11 @@ app.on('ready', () => {
     center: true,
     maximizable: false,
     show: false
+  });
+
+  globalShortcut.register('CommandOrControl+Alt+p', () => {
+    global.win.show();
+    global.win.focus();
   });
 
   setMainIpc(global.win);
