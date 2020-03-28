@@ -1,6 +1,6 @@
 import path from 'path';
 import os from 'os';
-import { ipcRenderer, remote } from 'electron';
+import { ipcRenderer, remote, clipboard } from 'electron';
 import settings from 'electron-settings';
 import {
   clearImages,
@@ -70,4 +70,20 @@ export const saveFile = () => {
   console.log(image);
   const ext = path.extname(image);
   ipcRenderer.send('open-save-dialog', ext);
+};
+
+export const pasteImage = () => {
+  const image = clipboard.readImage();
+  const data = image.toDataURL();
+  if (data.indexOf('data:image/png;base64') !== -1 && !image.isEmpty()) {
+    const mainImage = document.getElementById('image-displayed');
+    mainImage.src = data;
+    mainImage.dataset.original = data;
+  } else {
+    showDialog(
+      'error',
+      'CustomPics',
+      'No hay una imagen valida en el protapapeles'
+    );
+  }
 };

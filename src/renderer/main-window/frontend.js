@@ -2,7 +2,8 @@ import {
   setIpc,
   openDirectory,
   saveFile,
-  openPreferens
+  openPreferens,
+  pasteImage
 } from './main-window/ipcRendererEvents';
 import {
   addImageEvents,
@@ -20,6 +21,7 @@ window.addEventListener('load', () => {
   buttonEvent('save-button', saveFile);
   buttonEvent('open-preferences', openPreferens);
   buttonEvent('print-button', print);
+  buttonEvent('paste-button', pasteImage);
 });
 
 const buttonEvent = (id, func) => {
