@@ -21,7 +21,7 @@ export const setIpc = () => {
     addImageEvents();
     selectFirstImage();
     settings.set('directory', dir);
-    console.log(settings.file());
+    document.getElementById('directory').innerHTML = dir;
   });
 
   ipcRenderer.on('save-image', (event, file) => {
