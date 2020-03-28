@@ -11,8 +11,10 @@ import {
   selectEvent,
   print
 } from './main-window/images-ui';
+import { createMenu } from './main-window/menu';
 
 window.addEventListener('load', () => {
+  createMenu();
   setIpc();
   addImageEvents();
   searchImage();
