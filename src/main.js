@@ -42,7 +42,8 @@ app.on('ready', () => {
     title: 'Hello world',
     center: true,
     maximizable: false,
-    show: false
+    show: false,
+    icon: path.join(__dirname, 'assets', 'icons', 'tray-icon.png')
   });
 
   globalShortcut.register('CommandOrControl+Alt+p', () => {
