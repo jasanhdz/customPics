@@ -3,7 +3,7 @@
 // Iniciando los objetos app y BrowserWindow
 import path from 'path';
 import os from 'os';
-import { app, BrowserWindow, Tray, globalShortcut } from 'electron';
+import { app, BrowserWindow, Tray, globalShortcut, protocol } from 'electron';
 
 import { setupErrors } from './errors/handleErrors';
 import devtools from './devtools';
@@ -24,6 +24,17 @@ app.on('before-quit', () => {
 
 // Ejecutando ordenes cuando la aplicación esta lista
 app.on('ready', () => {
+  protocol.registerFileProtocol(
+    'plp',
+    (request, callback) => {
+      const url = request.url.substr(6);
+      callback({ path: path.normalize(url) });
+    },
+    err => {
+      if (err) throw err;
+    }
+  );
+
   // creando una ventana
   global.win = new BrowserWindow({
     width: 800,
