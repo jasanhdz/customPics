@@ -2,13 +2,15 @@
 
 // Iniciando los objetos app y BrowserWindow
 import path from 'path';
-import { app, BrowserWindow } from 'electron';
+import os from 'os';
+import { app, BrowserWindow, Tray } from 'electron';
 
 import { setupErrors } from './errors/handleErrors';
 import devtools from './devtools';
 import { setMainIpc } from './ipcMainEvents';
 
 global.win;
+global.tray;
 
 if (process.env.NODE_ENV === 'development') {
   console.log('La variable de entorno funciono');
@@ -44,6 +46,18 @@ app.on('ready', () => {
   global.win.on('close', () => {
     global.win = null;
     app.quit();
+  });
+
+  let icon;
+  if (os.platform('win32')) {
+    icon = path.join(__dirname, 'assets', 'icons', 'tray-icon.ico');
+  } else {
+    icon = path.join(__dirname, 'assets', 'icons', 'tray-icon.png');
+  }
+  global.tray = new Tray(icon);
+  global.tray.setToolTip('CustomPics');
+  global.tray.on('click', () => {
+    global.win.isVisible() ? global.win.hide() : global.win.show();
   });
 
   global.win.loadURL(path.resolve(__dirname, 'renderer/index.html'));
