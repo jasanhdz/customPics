@@ -2,6 +2,10 @@ import url from 'url';
 import path from 'path';
 import { applyFilter } from './filter';
 
+export const print = () => {
+  window.print();
+};
+
 export const addImageEvents = () => {
   const thumbs = document.querySelectorAll('li.list-group-item');
   for (let i = 0; i < thumbs.length; i++) {

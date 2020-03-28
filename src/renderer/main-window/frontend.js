@@ -7,7 +7,8 @@ import {
 import {
   addImageEvents,
   searchImage,
-  selectEvent
+  selectEvent,
+  print
 } from './main-window/images-ui';
 
 window.addEventListener('load', () => {
@@ -18,6 +19,7 @@ window.addEventListener('load', () => {
   buttonEvent('open-directory', openDirectory);
   buttonEvent('save-button', saveFile);
   buttonEvent('open-preferences', openPreferens);
+  buttonEvent('print-button', print);
 });
 
 const buttonEvent = (id, func) => {
